@@ -1,4 +1,4 @@
-import { Game, Ship } from "./objects.js";
+import { Ship, Asteroid, Game } from "./objects.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
@@ -20,6 +20,10 @@ ctx.fillStyle = "#131313";
 ctx.fillRect(0, 0, W, H);
 
 const ship = new Ship(W, H);
+let asteroids = [];
+const game = new Game();
+
+createAsteroids();
 
 document.onkeydown = function (e) {
   if (e.key === "ArrowLeft") {
@@ -87,4 +91,37 @@ function update() {
     ship.x += ship.thrust.x;
     ship.y -= ship.thrust.y;
   }
+
+  // asteroids
+  for (const asteroid of asteroids) {
+    ctx.beginPath();
+    ctx.strokeStyle = "grey";
+    ctx.lineWidth = 2;
+    ctx.arc(asteroid.x, asteroid.y, asteroid.r, 0, 2 * Math.PI, false);
+    ctx.stroke();
+
+    // move
+    asteroid.move();
+    // handle edges
+    asteroid.handleEdges(W, H);
+  }
+}
+
+function createAsteroids() {
+  for (let index = 0; index < game.numAsteroids; index++) {
+    let x, y;
+    do {
+      x = Math.random() * W;
+      y = Math.random() * H;
+    } while (distanceBetweenAS(ship.x, ship.y, x, y) < 160 + ship.r * 3);
+    asteroids.push(new Asteroid(x, y, 80));
+  }
+}
+
+/** 
+distance between Asteroid & Ship
+[48:00 - 49:20]
+ */
+function distanceBetweenAS(shipX, shipY, astX, astY) {
+  return Math.sqrt(Math.pow(astX - shipX, 2) + Math.pow(astY - shipY, 2));
 }

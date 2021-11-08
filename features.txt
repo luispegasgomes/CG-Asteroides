@@ -5,8 +5,11 @@ DONE
 - Criação da nave triangular [6:40 - 11:50]
 - Rotação direita/esquerda da nave
 - Aparecimento da nave no lado oposto de onde ela desaparece
+- Movimentação para a frente (!)
+- Criação do asteroíde 
+- Movimentação do asteroíde
+- Aparecimento do asteroíde no lado oposto de onde ela desaparece
 
 IN PROGRESS
-- Movimentação para a frente
 
 TO DO
