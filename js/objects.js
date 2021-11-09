@@ -47,8 +47,8 @@ export class Asteroid {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
-    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
+    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? 2 : -2) * 2;
+    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? 2 : -2) * 2;
   }
 
   move() {
@@ -58,19 +58,19 @@ export class Asteroid {
 
   handleEdges(W, H) {
     //up - down
-    if (this.y < 0 - this.r * 2) this.y = H;
+    if (this.y < 0 - this.r) this.y = H + this.r;
     // down - up
-    if (this.y > H) this.y = 0;
+    if (this.y > H + this.r) this.y = 0 - this.r;
     // left - right
-    if (this.x < 0 - this.r * 2) this.x = W;
+    if (this.x < 0 - this.r) this.x = W + this.r;
     // right - left
-    if (this.x > W) this.x = 0;
+    if (this.x > W + this.r) this.x = 0 - this.r;
   }
 }
 
 export class Game {
   constructor() {
     this.level = 1;
-    this.numAsteroids = 3;
+    this.numAsteroids = 5;
   }
 }
