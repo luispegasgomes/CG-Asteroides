@@ -71,6 +71,6 @@ export class Asteroid {
 export class Game {
   constructor() {
     this.level = 1;
-    this.numAsteroids = 5;
+    this.numAsteroids = 3;
   }
 }
