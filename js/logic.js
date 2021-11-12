@@ -54,7 +54,8 @@ document.onkeyup = function (e) {
   }
 };
 
-setInterval(update, 100);
+//setInterval(update, 100);
+update()
 
 function update() {
   ctx.fillRect(0, 0, W, H);
@@ -104,6 +105,8 @@ function update() {
     // handle edges
     asteroid.handleEdges(W, H);
   }
+
+  requestAnimationFrame(update)
 }
 
 function createAsteroids() {

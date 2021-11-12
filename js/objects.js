@@ -10,16 +10,16 @@ export class Ship {
   }
 
   rotateLeft() {
-    this.rot = (2 * Math.PI) / 20; // original: ((360 / 180) * Math.PI) / 10
+    this.rot = (2 * Math.PI) / 50; // original: ((360 / 180) * Math.PI) / 10
   }
 
   rotateRight() {
-    this.rot = (-2 * Math.PI) / 20; // original: ((-360 / 180) * Math.PI) / 10
+    this.rot = (-2 * Math.PI) / 50; // original: ((-360 / 180) * Math.PI) / 10
   }
 
   moveForward() {
-    this.thrust.x = Math.cos(this.a) * 10;
-    this.thrust.y = Math.sin(this.a) * 10;
+    this.thrust.x = Math.cos(this.a) * 5;
+    this.thrust.y = Math.sin(this.a) * 5;
   }
 
   stopRotation() {
