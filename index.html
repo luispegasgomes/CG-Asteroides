@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Asteroids Game</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        body,
+        body * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: url('./img/fundo.jpg');
+            background-size: cover;
+            color: rgb(197, 195, 195);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 70px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center;
+        }
+
+        button {
+            width: 20%;
+            align-self: center;
+            border: 2px solid rgb(197, 195, 195);
+            border-radius: 20px;
+            background-color: transparent;
+            color: rgb(197, 195, 195);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 40px;
+            padding: 10px 0;
+            cursor: pointer;
+        }
+
+        footer {
+            font-size: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>ASTEROIDS</h1>
+    <button id="btnPlay">PLAY GAME</button>
+    <footer>Joana Portugal | Luís Gomes | Pedro Silva</footer>
+</body>
+
+<script>
+
+    const btnPlay = document.getElementById("btnPlay")
+
+    btnPlay.style.display = "none"
+
+    setTimeout(() => {
+        btnPlay.style.display = "block"
+    }, 4000)
+    
+    btnPlay.addEventListener("click", () => location.href="./game.html")
+
+</script>
+
+</html>
