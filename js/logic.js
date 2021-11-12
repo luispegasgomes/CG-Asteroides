@@ -12,7 +12,6 @@ const W = canvas.width,
 let keys = {
   arrowLeft: false,
   arrowRight: false,
-  arrowUp: false,
 };
 
 // space
@@ -35,8 +34,10 @@ document.onkeydown = function (e) {
     ship.rotateRight();
   }
   if (e.key === "ArrowUp") {
-    keys.arrowUp = true;
     ship.thrusting = true;
+  }
+  if (e.key === "ArrowDown") {
+    ship.thrusting = false;
   }
 
   ship.handleEdges(W, H);
@@ -50,10 +51,6 @@ document.onkeyup = function (e) {
   if (e.key === "ArrowRight") {
     keys.arrowRight = false;
     ship.stopRotation();
-  }
-  if (e.key === "ArrowUp") {
-    keys.arrowUp = false;
-    ship.thrusting = false;
   }
 };
 
@@ -91,6 +88,8 @@ function update() {
     ship.x += ship.thrust.x;
     ship.y -= ship.thrust.y;
   }
+
+  ship.handleEdges(W, H)
 
   // asteroids
   for (const asteroid of asteroids) {

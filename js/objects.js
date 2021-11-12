@@ -18,8 +18,8 @@ export class Ship {
   }
 
   moveForward() {
-    this.thrust.x += Math.cos(this.a);
-    this.thrust.y += Math.sin(this.a);
+    this.thrust.x = Math.cos(this.a) * 10;
+    this.thrust.y = Math.sin(this.a) * 10;
   }
 
   stopRotation() {
