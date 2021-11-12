@@ -2,7 +2,7 @@ export class Ship {
   constructor(W, H) {
     this.x = W / 2;
     this.y = H / 2;
-    this.r = 15;
+    this.r = 20;
     this.a = 0.5 * Math.PI; // original: (90 / 180) * Math.PI
     this.rot = 0;
     this.thrusting = false;
