@@ -6,10 +6,22 @@ DONE
 - Rotação direita/esquerda da nave
 - Aparecimento da nave no lado oposto de onde ela desaparece
 - Movimentação para a frente
-- Criação do asteroíde 
+- Criação do asteroíde
+- Verificação que o asteróide começa um pouco afastado da nave [48:00 - 49:20]
 - Movimentação do asteroíde
 - Aparecimento do asteroíde no lado oposto de onde ela desaparece
+- Nave para na colisão e fica impedida de se mexer
 
 IN PROGRESS
+- Nave explode e recomeça no início
+- Criação dos textos da pontuação e vidas
 
 TO DO
+- Tiros da nave
+- Destruição do asteróide
+- Aumento do nível
+- Aumento da pontuação
+- Diminuição das vidas na colisão
+- Verificar situação de 0 vidas e acabar com o jogo
+- Guardar pontuações
+- Editar index e mostrar as pontuações mais altas

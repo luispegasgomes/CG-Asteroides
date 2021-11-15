@@ -14,30 +14,26 @@ let keys = {
   arrowRight: false,
 };
 
-// space
-ctx.fillStyle = "#131313";
-ctx.fillRect(0, 0, W, H);
-
-const ship = new Ship(W, H);
+let ship = new Ship(W, H);
 let asteroids = [];
 const game = new Game();
 
 createAsteroids();
 
 document.onkeydown = function (e) {
-  if (e.key === "ArrowLeft") {
+  if (e.key === "ArrowLeft" && !ship.collided) {
     keys.arrowLeft = true;
     ship.rotateLeft();
   }
-  if (e.key === "ArrowRight") {
+  if (e.key === "ArrowRight" && !ship.collided) {
     keys.arrowRight = true;
     ship.rotateRight();
   }
-  if (e.key === "ArrowUp") {
+  if (e.key === "ArrowUp" && !ship.collided) {
     ship.thrusting = true;
   }
   if (e.key === "ArrowDown") {
-    ship.thrusting = false;
+    ship.stop();
   }
 
   ship.handleEdges(W, H);
@@ -54,11 +50,19 @@ document.onkeyup = function (e) {
   }
 };
 
-//setInterval(update, 100);
-update()
+update();
 
 function update() {
+  // space
+  ctx.fillStyle = "#131313";
   ctx.fillRect(0, 0, W, H);
+
+  // texts
+  // TODO: texto da pontuação
+  // TODO: texto das vidas
+  // dicas: criar um score e lifes na classe game e meter aqui
+  // criar texto: power point 4, slide 28
+
   // triangular ship
   ctx.strokeStyle = "white";
   ctx.lineWidth = 3;
@@ -90,7 +94,7 @@ function update() {
     ship.y -= ship.thrust.y;
   }
 
-  ship.handleEdges(W, H)
+  ship.handleEdges(W, H);
 
   // asteroids
   for (const asteroid of asteroids) {
@@ -104,9 +108,20 @@ function update() {
     asteroid.move();
     // handle edges
     asteroid.handleEdges(W, H);
+
+    // check collision
+    if (
+      distanceBetweenAS(ship.x, ship.y, asteroid.x, asteroid.y) <
+      ship.r + asteroid.r
+    ) {
+      ship.collided = true;
+      ship.stop();
+      // TODO: explosão (bola laranja dentro da nave)
+      setTimeout(() => (ship = new Ship(W, H)), 100); // create new ship after 0.1s
+    }
   }
 
-  requestAnimationFrame(update)
+  requestAnimationFrame(update);
 }
 
 function createAsteroids() {
@@ -122,8 +137,10 @@ function createAsteroids() {
 
 /** 
 distance between Asteroid & Ship
-[48:00 - 49:20]
  */
 function distanceBetweenAS(shipX, shipY, astX, astY) {
-  return Math.sqrt(Math.pow(astX - shipX, 2) + Math.pow(astY - shipY, 2));
+  let dx = shipX - astX;
+  let dy = shipY - astY;
+  let D = Math.sqrt(dx * dx + dy * dy);
+  return D;
 }

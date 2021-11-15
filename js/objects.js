@@ -5,6 +5,7 @@ export class Ship {
     this.r = 20;
     this.a = 0.5 * Math.PI; // original: (90 / 180) * Math.PI
     this.rot = 0;
+    this.collided = false;
     this.thrusting = false;
     this.thrust = { x: 0, y: 0 };
   }
@@ -30,6 +31,10 @@ export class Ship {
     this.a += this.rot;
   }
 
+  stop() {
+    this.thrusting = false;
+  }
+
   handleEdges(W, H) {
     //up - down
     if (this.y < 0 - this.r) this.y = H;
@@ -47,8 +52,8 @@ export class Asteroid {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? 2 : -2) * 2;
-    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? 2 : -2) * 2;
+    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
+    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
   }
 
   move() {
