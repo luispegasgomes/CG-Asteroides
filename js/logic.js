@@ -58,10 +58,10 @@ function update() {
   ctx.fillRect(0, 0, W, H);
 
   // texts
-  // TODO: texto da pontuação
-  // TODO: texto das vidas
-  // dicas: criar um score e lifes na classe game e meter aqui
-  // criar texto: power point 4, slide 28
+  ctx.font = "30px Comic Sans MS";
+  ctx.fillStyle = 'white';
+  ctx.fillText(`Pontos: ${game.score}`, 15, 40);
+  ctx.fillText(`Vidas: ${game.lifes}`, 180, 40);
 
   // triangular ship
   ctx.strokeStyle = "white";
@@ -117,7 +117,14 @@ function update() {
       ship.collided = true;
       ship.stop();
       // TODO: explosão (bola laranja dentro da nave)
-      setTimeout(() => (ship = new Ship(W, H)), 100); // create new ship after 0.1s
+      
+      ctx.fillStyle = "orange"
+      ctx.strokeStyle = "red"
+      ctx.beginPath();
+      ctx.arc(ship.x, ship.y, ship.r * 2, 0, Math.PI * 2, false)
+      ctx.fill()
+      ctx.stroke()
+      setTimeout(() => (ship = new Ship(W, H)), 250); // create new ship after 0.25s      
     }
   }
 
@@ -144,3 +151,4 @@ function distanceBetweenAS(shipX, shipY, astX, astY) {
   let D = Math.sqrt(dx * dx + dy * dy);
   return D;
 }
+

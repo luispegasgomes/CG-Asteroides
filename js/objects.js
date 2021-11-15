@@ -77,5 +77,7 @@ export class Game {
   constructor() {
     this.level = 1;
     this.numAsteroids = 3;
+    this.score = 0;
+    this.lifes = 3;
   }
 }
