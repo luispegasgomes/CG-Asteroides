@@ -79,5 +79,6 @@ export class Game {
     this.numAsteroids = 3;
     this.score = 0;
     this.lifes = 3;
+    this.decreasePermission = true;
   }
 }

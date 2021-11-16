@@ -59,7 +59,7 @@ function update() {
 
   // texts
   ctx.font = "30px Comic Sans MS";
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = "white";
   ctx.fillText(`Pontos: ${game.score}`, 15, 40);
   ctx.fillText(`Vidas: ${game.lifes}`, 180, 40);
 
@@ -116,15 +116,21 @@ function update() {
     ) {
       ship.collided = true;
       ship.stop();
-      // TODO: explosão (bola laranja dentro da nave)
-      
-      ctx.fillStyle = "orange"
-      ctx.strokeStyle = "red"
-      ctx.beginPath();
-      ctx.arc(ship.x, ship.y, ship.r * 2, 0, Math.PI * 2, false)
-      ctx.fill()
-      ctx.stroke()
-      setTimeout(() => (ship = new Ship(W, H)), 250); // create new ship after 0.25s      
+      if (game.decreasePermission) {
+        game.lifes--;
+        game.decreasePermission = false;
+
+        ctx.fillStyle = "orange";
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+        ctx.arc(ship.x, ship.y, ship.r * 2, 0, Math.PI * 2, false);
+        ctx.fill();
+        ctx.stroke();
+        setTimeout(() => {
+          ship = new Ship(W, H);
+        }, 250); // create new ship after 0.25s
+        setTimeout(() => (game.decreasePermission = true), 3000); // wait 3s to decrease life again
+      }
     }
   }
 
@@ -151,4 +157,3 @@ function distanceBetweenAS(shipX, shipY, astX, astY) {
   let D = Math.sqrt(dx * dx + dy * dy);
   return D;
 }
-
