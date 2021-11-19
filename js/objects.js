@@ -20,11 +20,7 @@ export class Ship {
   }
 
   increaseVelocity() {
-    this.v = this.v > 7.5 ? this.v : this.v + 0.2;
-  }
-
-  resetVelocity() {
-    this.v = 2;
+    this.v = this.v > 7.5 ? this.v : Number((this.v + 1).toFixed(1));
   }
 
   moveForward() {

@@ -34,7 +34,6 @@ document.onkeydown = function (e) {
     keys.arrowUp = true;
     ship.thrusting = true;
     ship.increaseVelocity();
-    console.log(ship.v);
   }
 
   ship.handleEdges(W, H);
@@ -51,8 +50,6 @@ document.onkeyup = function (e) {
   }
   if (e.key === "ArrowUp" && ship) {
     keys.arrowUp = false;
-    ship.stop();
-    ship.resetVelocity();
   }
 };
 
@@ -97,6 +94,12 @@ function update() {
   }
 
   if (ship && ship.thrusting) {
+    if (keys.arrowUp == false) {
+      ship.v =
+        ship.v == 0
+          ? (ship.thrusting = false)
+          : Number((ship.v - 0.1).toFixed(1));
+    }
     ship.moveForward();
     ship.x += ship.thrust.x;
     ship.y -= ship.thrust.y;
@@ -138,11 +141,9 @@ function update() {
         ctx.arc(ship.x, ship.y, ship.r * 2, 0, Math.PI * 2, false);
         ctx.fill();
         ctx.stroke();
-        setTimeout(() => {
-          ship = undefined;
-        }, 250); // create new ship after 0.25s
+        setTimeout(() => (ship = undefined), 250);
         setTimeout(() => (ship = new Ship(W, H)), 2000);
-        setTimeout(() => (game.decreasePermission = true), 3000); // wait 1s to decrease life again
+        setTimeout(() => (game.decreasePermission = true), 3000);
       }
     }
   }
