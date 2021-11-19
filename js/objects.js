@@ -3,6 +3,7 @@ export class Ship {
     this.x = W / 2;
     this.y = H / 2;
     this.r = 20;
+    this.v = 2;
     this.a = 0.5 * Math.PI; // original: (90 / 180) * Math.PI
     this.rot = 0;
     this.collided = false;
@@ -18,9 +19,17 @@ export class Ship {
     this.rot = (-2 * Math.PI) / 50; // original: ((-360 / 180) * Math.PI) / 10
   }
 
+  increaseVelocity() {
+    this.v = this.v > 7.5 ? this.v : this.v + 0.2;
+  }
+
+  resetVelocity() {
+    this.v = 2;
+  }
+
   moveForward() {
-    this.thrust.x = Math.cos(this.a) * 5;
-    this.thrust.y = Math.sin(this.a) * 5;
+    this.thrust.x = Math.cos(this.a) * this.v;
+    this.thrust.y = Math.sin(this.a) * this.v;
   }
 
   stopRotation() {

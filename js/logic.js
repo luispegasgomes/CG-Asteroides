@@ -12,6 +12,7 @@ const W = canvas.width,
 let keys = {
   arrowLeft: false,
   arrowRight: false,
+  arrowUp: false,
 };
 
 let ship = new Ship(W, H);
@@ -21,32 +22,37 @@ const game = new Game();
 createAsteroids();
 
 document.onkeydown = function (e) {
-  if (e.key === "ArrowLeft" && !ship.collided) {
+  if (e.key === "ArrowLeft" && ship && !ship.collided) {
     keys.arrowLeft = true;
     ship.rotateLeft();
   }
-  if (e.key === "ArrowRight" && !ship.collided) {
+  if (e.key === "ArrowRight" && ship && !ship.collided) {
     keys.arrowRight = true;
     ship.rotateRight();
   }
-  if (e.key === "ArrowUp" && !ship.collided) {
+  if (e.key === "ArrowUp" && ship && !ship.collided) {
+    keys.arrowUp = true;
     ship.thrusting = true;
-  }
-  if (e.key === "ArrowDown") {
-    ship.stop();
+    ship.increaseVelocity();
+    console.log(ship.v);
   }
 
   ship.handleEdges(W, H);
 };
 
 document.onkeyup = function (e) {
-  if (e.key === "ArrowLeft") {
+  if (e.key === "ArrowLeft" && ship) {
     keys.arrowLeft = false;
     ship.stopRotation();
   }
-  if (e.key === "ArrowRight") {
+  if (e.key === "ArrowRight" && ship) {
     keys.arrowRight = false;
     ship.stopRotation();
+  }
+  if (e.key === "ArrowUp" && ship) {
+    keys.arrowUp = false;
+    ship.stop();
+    ship.resetVelocity();
   }
 };
 
@@ -63,38 +69,42 @@ function update() {
   ctx.fillText(`Pontos: ${game.score}`, 15, 40);
   ctx.fillText(`Vidas: ${game.lifes}`, 180, 40);
 
-  // triangular ship
-  ctx.strokeStyle = "white";
-  ctx.lineWidth = 3;
+  if (ship) {
+    // triangular ship
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 3;
 
-  ctx.beginPath();
-  // top
-  ctx.moveTo(
-    ship.x + ship.r * Math.cos(ship.a),
-    ship.y - ship.r * Math.sin(ship.a)
-  );
-  // move bottom left
-  ctx.lineTo(
-    ship.x - ship.r * (Math.cos(ship.a) + Math.sin(ship.a)),
-    ship.y + ship.r * (Math.sin(ship.a) - Math.cos(ship.a))
-  );
-  // move bottom right
-  ctx.lineTo(
-    ship.x - ship.r * (Math.cos(ship.a) - Math.sin(ship.a)),
-    ship.y + ship.r * (Math.sin(ship.a) + Math.cos(ship.a))
-  );
-  ctx.closePath();
-  ctx.stroke();
+    ctx.beginPath();
+    // top
+    ctx.moveTo(
+      ship.x + ship.r * Math.cos(ship.a),
+      ship.y - ship.r * Math.sin(ship.a)
+    );
+    // move bottom left
+    ctx.lineTo(
+      ship.x - ship.r * (Math.cos(ship.a) + Math.sin(ship.a)),
+      ship.y + ship.r * (Math.sin(ship.a) - Math.cos(ship.a))
+    );
+    // move bottom right
+    ctx.lineTo(
+      ship.x - ship.r * (Math.cos(ship.a) - Math.sin(ship.a)),
+      ship.y + ship.r * (Math.sin(ship.a) + Math.cos(ship.a))
+    );
+    ctx.closePath();
+    ctx.stroke();
 
-  ship.updateAngle();
+    ship.updateAngle();
+  }
 
-  if (ship.thrusting) {
+  if (ship && ship.thrusting) {
     ship.moveForward();
     ship.x += ship.thrust.x;
     ship.y -= ship.thrust.y;
   }
 
-  ship.handleEdges(W, H);
+  if (ship) {
+    ship.handleEdges(W, H);
+  }
 
   // asteroids
   for (const asteroid of asteroids) {
@@ -111,8 +121,10 @@ function update() {
 
     // check collision
     if (
+      ship &&
+      game.decreasePermission &&
       distanceBetweenAS(ship.x, ship.y, asteroid.x, asteroid.y) <
-      ship.r + asteroid.r
+        ship.r + asteroid.r
     ) {
       ship.collided = true;
       ship.stop();
@@ -127,9 +139,10 @@ function update() {
         ctx.fill();
         ctx.stroke();
         setTimeout(() => {
-          ship = new Ship(W, H);
+          ship = undefined;
         }, 250); // create new ship after 0.25s
-        setTimeout(() => (game.decreasePermission = true), 3000); // wait 3s to decrease life again
+        setTimeout(() => (ship = new Ship(W, H)), 2000);
+        setTimeout(() => (game.decreasePermission = true), 3000); // wait 1s to decrease life again
       }
     }
   }

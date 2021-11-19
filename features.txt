@@ -11,10 +11,10 @@ DONE
 - Movimentação do asteroíde
 - Aparecimento do asteroíde no lado oposto de onde ela desaparece
 - Nave para na colisão e fica impedida de se mexer
-
-IN PROGRESS
 - Nave explode e recomeça no início
 - Criação dos textos da pontuação e vidas
+
+IN PROGRESS
 
 TO DO
 - Tiros da nave
