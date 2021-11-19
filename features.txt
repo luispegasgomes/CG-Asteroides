@@ -7,7 +7,7 @@ DONE
 - Aparecimento da nave no lado oposto de onde ela desaparece
 - Movimentação para a frente
 - Criação do asteroíde
-- Verificação que o asteróide começa um pouco afastado da nave [48:00 - 49:20]
+- Verificação que o asteróide começa um pouco afastado da nave
 - Movimentação do asteroíde
 - Aparecimento do asteroíde no lado oposto de onde ela desaparece
 - Nave para na colisão e fica impedida de se mexer
