@@ -13,15 +13,15 @@ DONE
 - Nave para na colisão e fica impedida de se mexer
 - Nave explode e recomeça no início
 - Criação dos textos da pontuação e vidas
+- Verificar situação de 0 vidas e acabar com o jogo
 
 IN PROGRESS
 
 TO DO
 - Tiros da nave
 - Destruição do asteróide
-- Aumento do nível
 - Aumento da pontuação
+- Aumento do nível
 - Diminuição das vidas na colisão
-- Verificar situação de 0 vidas e acabar com o jogo
 - Guardar pontuações
 - Editar index e mostrar as pontuações mais altas

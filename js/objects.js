@@ -3,7 +3,7 @@ export class Ship {
     this.x = W / 2;
     this.y = H / 2;
     this.r = 20;
-    this.v = 2;
+    this.v = 0;
     this.a = 0.5 * Math.PI; // original: (90 / 180) * Math.PI
     this.rot = 0;
     this.collided = false;
@@ -20,7 +20,14 @@ export class Ship {
   }
 
   increaseVelocity() {
-    this.v = this.v > 7.5 ? this.v : Number((this.v + 1).toFixed(1));
+    this.v = this.v > 7.5 ? this.v : Number((this.v + 0.2).toFixed(1));
+  }
+
+  decreaseVelocity() {
+    this.v =
+      this.v == 0
+        ? (this.thrusting = false)
+        : Number((this.v - 0.1).toFixed(1));
   }
 
   moveForward() {
@@ -81,10 +88,14 @@ export class Asteroid {
 export class Game {
   constructor() {
     this.level = 1;
-    this.numAsteroids = 6;
+    this.numAsteroids = 3;
     this.score = 0;
     this.lifes = 3;
     this.decreasePermission = true;
-    this.ray = [80, 60, 40, 20]
+    this.rays = [80, 60, 40, 20];
+  }
+
+  pickRay() {
+    return this.rays[Math.floor(Math.random() * this.rays.length)];
   }
 }
