@@ -127,7 +127,7 @@ function update() {
       ship &&
       game.decreasePermission &&
       distanceBetweenAS(ship.x, ship.y, asteroid.x, asteroid.y) <
-        ship.r + asteroid.r
+      ship.r + asteroid.r
     ) {
       ship.collided = true;
       ship.stop();
@@ -158,7 +158,7 @@ function createAsteroids() {
       x = Math.random() * W;
       y = Math.random() * H;
     } while (distanceBetweenAS(ship.x, ship.y, x, y) < 160 + ship.r * 3);
-    asteroids.push(new Asteroid(x, y, 80));
+    asteroids.push(new Asteroid(x, y, game.ray[Math.floor(Math.random() * game.ray.length)]));
   }
 }
 

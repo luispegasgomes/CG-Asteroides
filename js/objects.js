@@ -81,9 +81,10 @@ export class Asteroid {
 export class Game {
   constructor() {
     this.level = 1;
-    this.numAsteroids = 3;
+    this.numAsteroids = 6;
     this.score = 0;
     this.lifes = 3;
     this.decreasePermission = true;
+    this.ray = [80, 60, 40, 20]
   }
 }
