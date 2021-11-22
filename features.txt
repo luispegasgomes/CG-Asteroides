@@ -1,9 +1,9 @@
 Vídeo de ajuda: https://www.youtube.com/watch?v=H9CSWMxJx84&ab_channel=freeCodeCamp.org
 
 DONE
-- Criação do espaço (canvas)
-- Criação da nave triangular [6:40 - 11:50]
-- Rotação direita/esquerda da nave
+- Criação do espaço
+- Criação da nave triangular (vídeo)
+- Rotação direita/esquerda da nave (vídeo)
 - Aparecimento da nave no lado oposto de onde ela desaparece
 - Movimentação para a frente
 - Criação do asteroíde
@@ -13,6 +13,7 @@ DONE
 - Nave para na colisão e fica impedida de se mexer
 - Nave explode e recomeça no início
 - Criação dos textos da pontuação e vidas
+- Diminuição das vidas na colisão
 - Verificar situação de 0 vidas e acabar com o jogo
 
 IN PROGRESS
@@ -22,6 +23,5 @@ TO DO
 - Destruição do asteróide
 - Aumento da pontuação
 - Aumento do nível
-- Diminuição das vidas na colisão
 - Guardar pontuações
 - Editar index e mostrar as pontuações mais altas
