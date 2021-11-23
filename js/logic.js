@@ -136,7 +136,7 @@ function update() {
         if (
           lasers.length !== 0 &&
           distance(lasers[i].x, lasers[i].y, asteroids[j].x, asteroids[j].y) <
-            lasers[i].r + asteroids[j].r
+          lasers[i].r + asteroids[j].r
         ) {
           game.score += game.getPointsByAsteroidRad(asteroids[j].r);
           lasers.splice(i, 1);
@@ -146,26 +146,27 @@ function update() {
     }
 
     // asteroids
-    for (const asteroid of asteroids) {
+    for (let i = 0; i < asteroids.length; i++) {
       ctx.beginPath();
       ctx.strokeStyle = "grey";
       ctx.lineWidth = 2;
-      ctx.arc(asteroid.x, asteroid.y, asteroid.r, 0, 2 * Math.PI, false);
+      ctx.arc(asteroids[i].x, asteroids[i].y, asteroids[i].r, 0, 2 * Math.PI, false);
       ctx.stroke();
 
       // move
-      asteroid.move();
+      asteroids[i].move();
       // handle edges
-      asteroid.handleEdges(W, H);
+      asteroids[i].handleEdges(W, H);
 
       // check collision
       if (
         ship &&
         game.decreasePermission &&
-        distance(ship.x, ship.y, asteroid.x, asteroid.y) < ship.r + asteroid.r
+        distance(ship.x, ship.y, asteroids[i].x, asteroids[i].y) < ship.r + asteroids[i].r
       ) {
         ship.collided = true;
         ship.stop();
+        asteroids.splice(i, 1);
         if (game.decreasePermission) {
           game.lifes--;
           game.decreasePermission = false;
