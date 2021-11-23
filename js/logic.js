@@ -36,8 +36,12 @@ document.onkeydown = function (e) {
     ship.thrusting = true;
     ship.increaseVelocity();
   }
+
   if (e.key === " " && ship && !ship.collided) {
-    lasers.push(new Shoot(ship));
+    if (lasers.length < 5) {
+      lasers.push(new Shoot(ship));
+    }
+
   }
 
   if (ship) ship.handleEdges(W, H);
