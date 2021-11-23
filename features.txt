@@ -15,13 +15,14 @@ DONE
 - Criação dos textos da pontuação e vidas
 - Diminuição das vidas na colisão
 - Verificar situação de 0 vidas e acabar com o jogo
+- Criação dos tiros
+- Tiros a moverem-se
+- Destruição do asteróide
+- Aumento da pontuação
+- Aumento do nível
 
 IN PROGRESS
 
 TO DO
-- Tiros da nave
-- Destruição do asteróide
-- Aumento da pontuação
-- Aumento do nível
 - Guardar pontuações
 - Editar index e mostrar as pontuações mais altas

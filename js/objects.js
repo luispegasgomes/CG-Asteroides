@@ -92,10 +92,46 @@ export class Game {
     this.score = 0;
     this.lifes = 3;
     this.decreasePermission = true;
-    this.rays = [80, 60, 40, 20];
+    this.radius = [80, 60, 40, 20];
   }
 
-  pickRay() {
-    return this.rays[Math.floor(Math.random() * this.rays.length)];
+  pickRadius() {
+    return this.radius[Math.floor(Math.random() * this.radius.length)];
+  }
+
+  getPointsByAsteroidRad(radius) {
+    switch (radius) {
+      case 20:
+        return 100;
+      case 40:
+        return 70;
+      case 60:
+        return 40;
+      case 80:
+        return 20;
+    }
+  }
+}
+
+export class Shoot {
+  constructor(shipData) {
+    this.x = shipData.x + shipData.r * Math.cos(shipData.a);
+    this.y = shipData.y - shipData.r * Math.sin(shipData.a);
+    this.r = 5;
+    this.a = shipData.a;
+    this.thrust = { x: 0, y: 0 };
+  }
+
+  move() {
+    this.thrust.x = Math.cos(this.a) * 8;
+    this.thrust.y = Math.sin(this.a) * 8;
+    this.x += this.thrust.x;
+    this.y -= this.thrust.y;
+  }
+
+  isGone(canvasWidth, canvasHeight) {
+    return (
+      this.x < 0 || this.x > canvasWidth || this.y < 0 || this.y > canvasHeight
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Ship, Asteroid, Game } from "./objects.js";
+import { Ship, Asteroid, Game, Shoot } from "./objects.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
@@ -17,6 +17,7 @@ let keys = {
 
 let ship = new Ship(W, H);
 let asteroids = [];
+let lasers = [];
 let game = new Game();
 
 createAsteroids();
@@ -35,8 +36,11 @@ document.onkeydown = function (e) {
     ship.thrusting = true;
     ship.increaseVelocity();
   }
+  if (e.key === " " && ship && !ship.collided) {
+    lasers.push(new Shoot(ship));
+  }
 
-  ship.handleEdges(W, H);
+  if (ship) ship.handleEdges(W, H);
 };
 
 document.onkeyup = function (e) {
@@ -67,9 +71,15 @@ function update() {
     // texts
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "white";
-    ctx.fillText(`Pontos: ${game.score}`, 15, 40);
-    ctx.fillText(`Vidas: ${game.lifes}`, 180, 40);
-    ctx.fillText(`Nível: ${game.level}`, W - 150, 40);
+    ctx.fillText(`${game.score}`, 15, 40);
+    ctx.fillText(`Vidas: ${game.lifes}`, 15, 80);
+    ctx.fillText(`${game.level} / ∞`, W - 150, 40);
+
+    if (asteroids.length === 0) {
+      game.level++;
+      game.numAsteroids++;
+      createAsteroids();
+    }
 
     if (ship) {
       // triangular ship
@@ -110,6 +120,31 @@ function update() {
       ship.handleEdges(W, H);
     }
 
+    for (let i = 0; i < lasers.length; i++) {
+      ctx.beginPath();
+      ctx.fillStyle = "white";
+      ctx.arc(lasers[i].x, lasers[i].y, lasers[i].r, 0, 2 * Math.PI, false);
+      ctx.fill();
+      lasers[i].move();
+      // check out of screen
+      if (lasers[i].isGone(W, H)) {
+        lasers.splice(i, 1);
+      }
+
+      // check collision with asteroid and increase points
+      for (let j = 0; j < asteroids.length; j++) {
+        if (
+          lasers.length !== 0 &&
+          distance(lasers[i].x, lasers[i].y, asteroids[j].x, asteroids[j].y) <
+            lasers[i].r + asteroids[j].r
+        ) {
+          game.score += game.getPointsByAsteroidRad(asteroids[j].r);
+          lasers.splice(i, 1);
+          asteroids.splice(j, 1);
+        }
+      }
+    }
+
     // asteroids
     for (const asteroid of asteroids) {
       ctx.beginPath();
@@ -127,8 +162,7 @@ function update() {
       if (
         ship &&
         game.decreasePermission &&
-        distanceBetweenAS(ship.x, ship.y, asteroid.x, asteroid.y) <
-          ship.r + asteroid.r
+        distance(ship.x, ship.y, asteroid.x, asteroid.y) < ship.r + asteroid.r
       ) {
         ship.collided = true;
         ship.stop();
@@ -159,17 +193,17 @@ function createAsteroids() {
     do {
       x = Math.random() * W;
       y = Math.random() * H;
-    } while (distanceBetweenAS(ship.x, ship.y, x, y) < 160 + ship.r * 3);
-    asteroids.push(new Asteroid(x, y, game.pickRay()));
+    } while (distance(ship.x, ship.y, x, y) < 160 + ship.r * 3);
+    asteroids.push(new Asteroid(x, y, game.pickRadius()));
   }
 }
 
 /** 
-distance between Asteroid & Ship
+distance between object & Ship
  */
-function distanceBetweenAS(shipX, shipY, astX, astY) {
-  let dx = shipX - astX;
-  let dy = shipY - astY;
+function distance(objX, objY, astX, astY) {
+  let dx = objX - astX;
+  let dy = objY - astY;
   let D = Math.sqrt(dx * dx + dy * dy);
   return D;
 }
