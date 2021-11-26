@@ -64,8 +64,9 @@ export class Asteroid {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
-    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? 2 : -2);
+    this.v = this.getVelocity();
+    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? this.v : (this.v * -1));
+    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? this.v : (this.v * -1));
   }
 
   move() {
@@ -82,6 +83,19 @@ export class Asteroid {
     if (this.x < 0 - this.r) this.x = W + this.r;
     // right - left
     if (this.x > W + this.r) this.x = 0 - this.r;
+  }
+
+  getVelocity() {
+    switch (this.r) {
+      case 20:
+        return 5;
+      case 40:
+        return 4;
+      case 60:
+        return 3;
+      case 80:
+        return 2;
+    }
   }
 }
 

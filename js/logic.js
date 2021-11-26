@@ -139,7 +139,7 @@ function update() {
         if (
           lasers.length !== 0 &&
           distance(lasers[i].x, lasers[i].y, asteroids[j].x, asteroids[j].y) <
-            lasers[i].r + asteroids[j].r
+          lasers[i].r + asteroids[j].r
         ) {
           game.score += game.getPointsByAsteroidRad(asteroids[j].r);
           lasers.splice(i, 1);
@@ -173,7 +173,7 @@ function update() {
         ship &&
         game.decreasePermission &&
         distance(ship.x, ship.y, asteroids[i].x, asteroids[i].y) <
-          ship.r + asteroids[i].r
+        ship.r + asteroids[i].r
       ) {
         ship.collided = true;
         ship.stop();
@@ -207,7 +207,7 @@ function createAsteroids() {
       x = Math.random() * W;
       y = Math.random() * H;
     } while (distance(ship.x, ship.y, x, y) < 160 + ship.r * 3);
-    asteroids.push(new Asteroid(x, y, game.pickRadius()));
+    asteroids.push(new Asteroid(x, y, game.pickRadius(), (1000 / game.pickRadius())));
   }
 }
 
