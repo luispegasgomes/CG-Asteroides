@@ -12,22 +12,22 @@ export class Ship {
   }
 
   rotateLeft() {
-    this.rot = (2 * Math.PI) / 50; // original: ((360 / 180) * Math.PI) / 10
+    this.rot = (3 * Math.PI) / 100; // original: ((360 / 180) * Math.PI) / 10
   }
 
   rotateRight() {
-    this.rot = (-2 * Math.PI) / 50; // original: ((-360 / 180) * Math.PI) / 10
+    this.rot = (-3 * Math.PI) / 100; // original: ((-360 / 180) * Math.PI) / 10
   }
 
   increaseVelocity() {
-    this.v = this.v > 7.5 ? this.v : Number((this.v + 0.2).toFixed(1));
+    this.v = this.v > 7.5 ? this.v : Number((this.v + 0.4).toFixed(1));
   }
 
   decreaseVelocity() {
     this.v =
       this.v == 0
         ? (this.thrusting = false)
-        : Number((this.v - 0.1).toFixed(1));
+        : Number((this.v - 0.2).toFixed(1));
   }
 
   moveForward() {
@@ -65,8 +65,10 @@ export class Asteroid {
     this.y = y;
     this.r = r;
     this.v = this.getVelocity();
-    this.dX = Math.cos(Math.random()) * (Math.random() > 0.5 ? this.v : (this.v * -1));
-    this.dY = Math.sin(Math.random()) * (Math.random() > 0.5 ? this.v : (this.v * -1));
+    this.dX =
+      Math.cos(Math.random()) * (Math.random() > 0.5 ? this.v : this.v * -1);
+    this.dY =
+      Math.sin(Math.random()) * (Math.random() > 0.5 ? this.v : this.v * -1);
   }
 
   move() {
@@ -88,7 +90,7 @@ export class Asteroid {
   getVelocity() {
     switch (this.r) {
       case 20:
-        return 5;
+        return 4.5;
       case 40:
         return 4;
       case 60:
@@ -137,8 +139,8 @@ export class Shoot {
   }
 
   move() {
-    this.thrust.x = Math.cos(this.a) * 8;
-    this.thrust.y = Math.sin(this.a) * 8;
+    this.thrust.x = Math.cos(this.a) * 10;
+    this.thrust.y = Math.sin(this.a) * 10;
     this.x += this.thrust.x;
     this.y -= this.thrust.y;
   }
