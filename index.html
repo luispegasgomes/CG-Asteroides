@@ -1,84 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Asteroids Game</title>
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+<head>
+  <title>Asteroids Game</title>
 
-      body,
-      body * {
-        margin: 0;
-        padding: 0;
-      }
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-      body {
-        width: 100%;
-        height: 100vh;
-        background-image: url("./img/fundo.jpg");
-        background-size: cover;
-        color: rgb(197, 195, 195);
-        font-family: "Bebas Neue", cursive;
-        font-size: 70px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-content: center;
-      }
+    body,
+    body * {
+      margin: 0;
+      padding: 0;
+    }
 
-      h1:hover {
-        transition: all linear 1s;
-        transform: rotateX(360deg);
-      }
+    body {
+      width: 100%;
+      height: 100vh;
+      background-image: url("./img/fundo.jpg");
+      background-size: cover;
+      color: rgb(197, 195, 195);
+      font-family: "Bebas Neue", cursive;
+      font-size: 70px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+    }
 
-      button {
-        width: 20%;
-        align-self: center;
-        border: 2px solid rgb(197, 195, 195);
-        border-radius: 20px;
-        background-color: transparent;
-        color: rgb(197, 195, 195);
-        font-family: "Bebas Neue", cursive;
-        font-size: 40px;
-        padding: 10px 0;
-        cursor: pointer;
-      }
+    h1:hover {
+      transition: all linear 1s;
+      transform: rotateX(360deg);
+    }
 
-      span {
-        font-size: 20px;
-      }
+    button {
+      width: 20%;
+      align-self: center;
+      border: 2px solid rgb(197, 195, 195);
+      border-radius: 20px;
+      background-color: transparent;
+      color: rgb(197, 195, 195);
+      font-family: "Bebas Neue", cursive;
+      font-size: 40px;
+      padding: 10px 0;
+      cursor: pointer;
+    }
 
-      .nome {
-        font-size: 30px;
-        transition: font-size 1s linear;
-      }
+    span {
+      font-size: 20px;
+    }
 
-      .nome:hover {
-        font-size: 50px;
-      }
-    </style>
-  </head>
+    .nome {
+      font-size: 30px;
+      transition: font-size 1s linear;
+    }
 
-  <body>
-    <h1>ASTEROIDS</h1>
-    <button id="btnPlay">PLAY GAME</button>
-    <footer>
-      <span class="nome">Joana Portugal</span> <span>|</span>
-      <span class="nome">Luís Gomes</span> <span>|</span>
-      <span class="nome">Pedro Silva</span>
-    </footer>
-  </body>
+    .nome:hover {
+      font-size: 50px;
+    }
 
-  <script>
-    const btnPlay = document.getElementById("btnPlay");
+    .btn {
+      border-color: rgb(197, 195, 195);
+      color: black;
+      box-shadow: 0 0 40px 40px rgb(197, 195, 195) inset, 0 0 0 0 rgb(197, 195, 195);
+      -webkit-transition: all 150ms ease-in-out;
+      transition: all 150ms ease-in-out;
+    }
 
-    btnPlay.style.display = "none";
+    .btn:hover {
+      color: rgb(197, 195, 195);
+      box-shadow: 0 0 10px 0 rgb(197, 195, 195) inset, 0 0 10px 4px rgb(197, 195, 195);
+    }
+  </style>
+</head>
 
-    setTimeout(() => {
-      btnPlay.style.display = "block";
-    }, 4000);
+<body>
+  <h1>ASTEROIDS</h1>
+  <button id="btnPlay" class="btn">PLAY GAME</button>
+  <footer>
+    <span class="nome">Joana Portugal</span> <span>|</span>
+    <span class="nome">Luís Gomes</span> <span>|</span>
+    <span class="nome">Pedro Silva</span>
+  </footer>
+</body>
 
-    btnPlay.addEventListener("click", () => (location.href = "./game.html"));
-  </script>
+<script>
+  const btnPlay = document.getElementById("btnPlay");
+
+  btnPlay.style.display = "none";
+
+  setTimeout(() => {
+    btnPlay.style.display = "block";
+  }, 4000);
+
+  btnPlay.addEventListener("click", () => (location.href = "./game.html"));
+</script>
+
 </html>
