@@ -1,4 +1,9 @@
-import { Ship, Asteroid, Game, Shoot } from "./objects.js";
+import {
+  Ship,
+  Asteroid,
+  Game,
+  Shoot
+} from "./objects.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
@@ -75,7 +80,11 @@ function update() {
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "white";
     ctx.fillText(`${game.score}`, 15, 40);
-    ctx.fillText(`Vidas: ${game.lifes}`, 15, 80);
+    //ctx.fillText(`Vidas: ${game.lifes}`, 15, 80);
+    // Draw the lives
+    for (let i = 0; i < game.lifes; i++) {
+      drawTriangle(30 + i * 40 * 1.2, 80, 0.5 * Math.PI);
+    }
     ctx.fillText(`${game.level} / ∞`, W - 150, 40);
 
     if (asteroids.length === 0) {
@@ -138,7 +147,7 @@ function update() {
           lasers[i] &&
           asteroids[j] &&
           distance(lasers[i].x, lasers[i].y, asteroids[j].x, asteroids[j].y) <
-            lasers[i].r + asteroids[j].r
+          lasers[i].r + asteroids[j].r
         ) {
           game.score += game.getPointsByAsteroidRad(asteroids[j].r);
           lasers.splice(i, 1);
@@ -177,7 +186,7 @@ function update() {
         ship &&
         game.decreasePermission &&
         distance(ship.x, ship.y, asteroids[i].x, asteroids[i].y) <
-          ship.r + asteroids[i].r
+        ship.r + asteroids[i].r
       ) {
         ship.collided = true;
         ship.stop();
@@ -223,4 +232,28 @@ function distance(objX, objY, astX, astY) {
   let dy = objY - astY;
   let D = Math.sqrt(dx * dx + dy * dy);
   return D;
+}
+
+function drawTriangle(x, y, a) {
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 1.5;
+
+  ctx.beginPath();
+  // top
+  ctx.moveTo(
+    x + 20 * Math.cos(a),
+    y - 20 * Math.sin(a)
+  );
+  // move bottom left
+  ctx.lineTo(
+    x - 20 * (Math.cos(a) + Math.sin(a)),
+    y + 20 * (Math.sin(a) - Math.cos(a))
+  );
+  // move bottom right
+  ctx.lineTo(
+    x - 20 * (Math.cos(a) - Math.sin(a)),
+    y + 20 * (Math.sin(a) + Math.cos(a))
+  );
+  ctx.closePath();
+  ctx.stroke();
 }
