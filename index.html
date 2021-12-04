@@ -71,12 +71,65 @@
       color: rgb(197, 195, 195);
       box-shadow: 0 0 10px 0 rgb(197, 195, 195) inset, 0 0 10px 4px rgb(197, 195, 195);
     }
+
+    svg {
+      position: absolute;
+    }
   </style>
 </head>
 
 <body>
   <h1>ASTEROIDS</h1>
   <button id="btnPlay" class="btn">PLAY GAME</button>
+  <svg width="100%" height="100%" stroke="white" stroke-width="3">
+    <defs>
+      <path id="pacman" d="M50 3
+      L100 28
+      L100 75
+      L48.5 48.5
+      L50 100
+      L3 75
+      L3 25
+      Z" fill="white" fill-opacity="0" stroke="white">
+        <animateMotion dur="15s" repeatCount="indefinite"
+          path="M150,1000 C2500,528 500,900 548.5,548.5 C550-500 503,1 20,50 z" />
+      </path>
+    </defs>
+
+    <use xlink:href="#pacman" />
+
+
+
+
+    <!-- <path d="M250 3
+    L300 28
+    L300 75
+    L248.5 48.5
+    L250 100
+    L203 75
+    L203 25
+    Z" fill="url(#img/fundo)" />
+
+
+    <path d="M50 203
+    L100 228
+    L100 275
+    L48.5 248.5
+    L50 300
+    L3 275
+    L3 225
+    Z" fill="url(#img/fundo)" />
+
+
+    <path d="M250 203
+    L300 228
+    L300 275
+    L248.5 248.5
+    L250 300
+    L203 275
+    L203 225
+    Z" fill="url(#img/fundo)" /> -->
+  </svg>
   <footer>
     <span class="nome">Joana Portugal</span> <span>|</span>
     <span class="nome">Luís Gomes</span> <span>|</span>
