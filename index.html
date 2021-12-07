@@ -1,152 +1,141 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Asteroids Game</title>
 
-<head>
-  <title>Asteroids Game</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+      body,
+      body * {
+        margin: 0;
+        padding: 0;
+      }
 
-    body,
-    body * {
-      margin: 0;
-      padding: 0;
-    }
+      body {
+        width: 100%;
+        height: 100vh;
+        background-image: url("./img/fundo.jpg");
+        background-size: cover;
+        color: rgb(197, 195, 195);
+        font-family: "Bebas Neue", cursive;
+        font-size: 70px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+      }
 
-    body {
-      width: 100%;
-      height: 100vh;
-      background-image: url("./img/fundo.jpg");
-      background-size: cover;
-      color: rgb(197, 195, 195);
-      font-family: "Bebas Neue", cursive;
-      font-size: 70px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-content: center;
-    }
+      h1:hover {
+        transition: all linear 1s;
+        transform: rotateX(360deg);
+      }
 
-    h1:hover {
-      transition: all linear 1s;
-      transform: rotateX(360deg);
-    }
+      button {
+        width: 20%;
+        align-self: center;
+        border: 2px solid rgb(197, 195, 195);
+        border-radius: 20px;
+        background-color: transparent;
+        color: black;
+        font-family: "Bebas Neue", cursive;
+        font-size: 40px;
+        padding: 10px 0;
+        cursor: pointer;
+        box-shadow: 0 0 40px 40px rgb(197, 195, 195) inset,
+          0 0 0 0 rgb(197, 195, 195);
+        -webkit-transition: all 150ms ease-in-out;
+        transition: all 150ms ease-in-out;
+      }
 
-    button {
-      width: 20%;
-      align-self: center;
-      border: 2px solid rgb(197, 195, 195);
-      border-radius: 20px;
-      background-color: transparent;
-      color: rgb(197, 195, 195);
-      font-family: "Bebas Neue", cursive;
-      font-size: 40px;
-      padding: 10px 0;
-      cursor: pointer;
-    }
+      button:hover {
+        color: rgb(197, 195, 195);
+        box-shadow: 0 0 10px 0 rgb(197, 195, 195) inset,
+          0 0 10px 4px rgb(197, 195, 195);
+      }
 
-    span {
-      font-size: 20px;
-    }
+      span {
+        font-size: 20px;
+      }
 
-    .nome {
-      font-size: 30px;
-      transition: font-size 1s linear;
-    }
+      .nome {
+        font-size: 30px;
+        transition: font-size 1s linear;
+      }
 
-    .nome:hover {
-      font-size: 50px;
-    }
+      .nome:hover {
+        font-size: 50px;
+      }
 
-    .btn {
-      border-color: rgb(197, 195, 195);
-      color: black;
-      box-shadow: 0 0 40px 40px rgb(197, 195, 195) inset, 0 0 0 0 rgb(197, 195, 195);
-      -webkit-transition: all 150ms ease-in-out;
-      transition: all 150ms ease-in-out;
-    }
+      svg {
+        position: absolute;
+      }
 
-    .btn:hover {
-      color: rgb(197, 195, 195);
-      box-shadow: 0 0 10px 0 rgb(197, 195, 195) inset, 0 0 10px 4px rgb(197, 195, 195);
-    }
+      h1,
+      button,
+      footer {
+        z-index: 20;
+      }
 
-    svg {
-      position: absolute;
-    }
-  </style>
-</head>
+      #pacman {
+        transform-origin: 50% 50%;
+        animation-name: move;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
 
-<body>
-  <h1>ASTEROIDS</h1>
-  <button id="btnPlay" class="btn">PLAY GAME</button>
-  <svg width="100%" height="100%" stroke="white" stroke-width="3">
-    <defs>
-      <path id="pacman" d="M50 3
-      L100 28
-      L100 75
-      L48.5 48.5
-      L50 100
-      L3 75
-      L3 25
-      Z" fill="white" fill-opacity="0" stroke="white">
-        <animateMotion dur="15s" repeatCount="indefinite"
-          path="M150,1000 C2500,528 500,900 548.5,548.5 C550-500 503,1 20,50 z" />
-      </path>
-    </defs>
+      @keyframes move {
+        30% {
+          transform: translate(600px, 500px);
+        }
+        60% {
+          transform: translate(1300px, 20px);
+        }
+        80% {
+          transform: translate(600px, 150px);
+        }
+      }
+    </style>
+  </head>
 
-    <use xlink:href="#pacman" />
+  <body>
+    <h1>ASTEROIDS</h1>
+    <button id="btnPlay">PLAY GAME</button>
+    <svg width="100%" height="100%">
+      <path
+        id="pacman"
+        d="M150 103
+      L200 128
+      L200 175
+      L148.5 148.5
+      L150 200
+      L103 175
+      L103 125
+      Z"
+        fill="white"
+        fill-opacity="0"
+        stroke="white"
+        stroke-width="3"
+      ></path>
+    </svg>
+    <footer>
+      <span class="nome">Joana Portugal</span> <span>|</span>
+      <span class="nome">Luís Gomes</span> <span>|</span>
+      <span class="nome">Pedro Silva</span>
+    </footer>
+  </body>
 
+  <script>
+    const btnPlay = document.getElementById("btnPlay");
 
+    btnPlay.style.display = "none";
 
+    setTimeout(() => {
+      btnPlay.style.display = "block";
+    }, 4000);
 
-    <!-- <path d="M250 3
-    L300 28
-    L300 75
-    L248.5 48.5
-    L250 100
-    L203 75
-    L203 25
-    Z" fill="url(#img/fundo)" />
-
-
-    <path d="M50 203
-    L100 228
-    L100 275
-    L48.5 248.5
-    L50 300
-    L3 275
-    L3 225
-    Z" fill="url(#img/fundo)" />
-
-
-    <path d="M250 203
-    L300 228
-    L300 275
-    L248.5 248.5
-    L250 300
-    L203 275
-    L203 225
-    Z" fill="url(#img/fundo)" /> -->
-  </svg>
-  <footer>
-    <span class="nome">Joana Portugal</span> <span>|</span>
-    <span class="nome">Luís Gomes</span> <span>|</span>
-    <span class="nome">Pedro Silva</span>
-  </footer>
-</body>
-
-<script>
-  const btnPlay = document.getElementById("btnPlay");
-
-  btnPlay.style.display = "none";
-
-  setTimeout(() => {
-    btnPlay.style.display = "block";
-  }, 4000);
-
-  btnPlay.addEventListener("click", () => (location.href = "./game.html"));
-</script>
-
+    btnPlay.addEventListener("click", () => (location.href = "./game.html"));
+  </script>
 </html>
