@@ -1,4 +1,4 @@
-Vídeo de ajuda: https://www.youtube.com/watch?v=H9CSWMxJx84&ab_channel=freeCodeCamp.org
+Vídeo de apoio: https://www.youtube.com/watch?v=H9CSWMxJx84&ab_channel=freeCodeCamp.org
 
 DONE
 - Criação do espaço
@@ -20,9 +20,8 @@ DONE
 - Destruição do asteróide
 - Aumento da pontuação
 - Aumento do nível
+- Fazer animações na página inicial
 
 IN PROGRESS
 
 TO DO
-- Guardar pontuações
-- Editar index e mostrar as pontuações mais altas
